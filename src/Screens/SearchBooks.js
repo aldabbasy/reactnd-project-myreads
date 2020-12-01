@@ -7,7 +7,7 @@ export default function SearchBooks({searchAPI}) {
     const [query, setQuery] = useState('');
     const [searchedBooks, setSearchedBooks] = useState([]);
 
-    const updateQueryHandler = async (searchQuery) => {
+    const updateQueryHandler = (searchQuery) => {
       
        setQuery(searchQuery.trim())
        searchAPI(searchQuery.trim(), 20).then((res) => {
