@@ -7,9 +7,10 @@ export default function SearchBooks({searchAPI}) {
     const [query, setQuery] = useState('');
     const [searchedBooks, setSearchedBooks] = useState([]);
 
-    const updateQueryHandler = (searchQuery) => {
-      setQuery(searchQuery.trim())
-      searchAPI(query, 20).then((res) => {
+    const updateQueryHandler = async (searchQuery) => {
+      
+       setQuery(searchQuery.trim())
+       searchAPI(searchQuery.trim(), 20).then((res) => {
           if(Object.prototype.toString.call(res) === '[object Array]')
           {
             setSearchedBooks(res)
@@ -20,16 +21,13 @@ export default function SearchBooks({searchAPI}) {
         })
       
     }
-    const clearQueryHandler = () => {
-        updateQueryHandler('')
-    }
 
     return (
         <div className="search-books">
             <div className="search-books-bar">
-                <Link to="/" className="close-search" onClick={() => {clearQueryHandler()}}>Close</Link>
+                <Link to="/" className="close-search" onClick={() => {setQuery('')}}>Close</Link>
               <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search..." onEmptied={() => {clearQueryHandler()}} onChange={(e) => {updateQueryHandler(e.target.value)}} value={query}/>
+                <input type="text" placeholder="Search..." onEmptied={() => {setQuery('')}} onChange={(e) => {updateQueryHandler(e.target.value)}} value={query}/>
               </div>
             </div>
             <div className="search-books-results">
