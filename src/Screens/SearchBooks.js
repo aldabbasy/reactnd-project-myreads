@@ -36,8 +36,7 @@ export default function SearchBooks() {
               <ol className="books-grid">
               {query !== '' && searchedBooks.map((book) => (
                 <li key={book.id}>
-                    <Book />
-                    {book.title}
+                    <Book title={book.title} authors={book.authors} cover={book.imageLinks.thumbnail}/>
                 </li>
               ))}
               </ol>
