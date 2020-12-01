@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Book from '../Components/Book'
-import * as CallingAPI from '../Services/BooksAPI'
-export default function SearchBooks() {
+
+export default function SearchBooks({searchAPI}) {
 
     const [query, setQuery] = useState('');
     const [searchedBooks, setSearchedBooks] = useState([]);
 
     const updateQueryHandler = (searchQuery) => {
       setQuery(searchQuery.trim())
-        CallingAPI.search(query, 20).then((res) => {
+      searchAPI(query, 20).then((res) => {
           if(Object.prototype.toString.call(res) === '[object Array]')
           {
             setSearchedBooks(res)
