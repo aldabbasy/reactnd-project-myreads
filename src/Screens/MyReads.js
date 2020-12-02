@@ -9,7 +9,9 @@ export default function MyReads() {
             </div>
             <div className="list-books-content">
             <div>
-                <Bookshelf />
+                <Bookshelf apiID='currentlyReading' title='Currently Reading' />
+                <Bookshelf apiID='wantToRead' title='Want To Read' />
+                <Bookshelf apiID='read' title='Read' />
             </div>
             </div>
             <div className="open-search">
