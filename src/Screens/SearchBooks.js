@@ -25,21 +25,22 @@ export default function SearchBooks({setBooks, allBooks, updateAPI, searchAPI}) 
     const handleSelectChange = (book, shelf) => {
       if(book)
       {
-        updateAPI(book, shelf)
-        if(shelf !== 'none')
-        {
-          setSearchedBooks(
-            searchedBooks.filter((b) => {
+        updateAPI(book, shelf).then((res) => {
+          if(shelf !== 'none')
+          {
+            setSearchedBooks(
+              searchedBooks.filter((b) => {
+                return b.id !== book.id
+              })
+            )
+            let _removeBook = allBooks.filter((b) => {
               return b.id !== book.id
             })
-          )
-          let _removeBook = allBooks.filter((b) => {
-            return b.id !== book.id
-          })
-          book.shelf = shelf
-          _removeBook.push(book)
-          setBooks(_removeBook)
-        }
+            book.shelf = shelf
+            _removeBook.push(book)
+            setBooks(_removeBook)
+          }
+        })
       }
     }
 

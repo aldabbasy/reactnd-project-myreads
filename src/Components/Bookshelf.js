@@ -7,15 +7,15 @@ export default function Bookshelf({getBook, allBooks, setBooks, books, updateAPI
 		{
 		  if(shelf !== book.shelf)
 		  {
-			updateAPI(book, shelf)
-			let _removeBook = allBooks.filter((b) => {
-				return b.id !== book.id
+			updateAPI(book, shelf).then((res) => {
+				let _removeBook = allBooks.filter((b) => {
+					return b.id !== book.id
+				})
+				getBook(book.id).then((res) => {
+					_removeBook.push(res)
+					setBooks(_removeBook)
+				})
 			})
-			getBook(book.id).then((res) => {
-				_removeBook.push(res)
-				setBooks(_removeBook)
-			})
-			
 		  }
 		}
 	  }
