@@ -1,12 +1,20 @@
 import React from 'react'
 
-export default function Book({title, authors, cover}) {
+export default function Book({updateAPI, book, title, authors, cover}) {
+
+	const handleSelectChange = (shelf) => {
+		if(book)
+		{
+			updateAPI(book, shelf)
+		}
+	}
+
     return (
 	<div className="book">
 		<div className="book-top">
 			<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${cover || ''}")` }}></div>
 			<div className="book-shelf-changer">
-				<select>
+				<select defaultValue='move' onChange={(e) => {handleSelectChange(e.target.value)}}>
 					<option value="move" disabled>Move to...</option>
 					<option value="currentlyReading">Currently Reading</option>
 					<option value="wantToRead">Want to Read</option>

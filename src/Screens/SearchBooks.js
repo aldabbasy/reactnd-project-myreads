@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Book from '../Components/Book'
 
-export default function SearchBooks({searchAPI}) {
+export default function SearchBooks({setBooks, allBooks, updateAPI, searchAPI}) {
 
     const [query, setQuery] = useState('');
     const [searchedBooks, setSearchedBooks] = useState([]);
@@ -22,6 +22,27 @@ export default function SearchBooks({searchAPI}) {
       
     }
 
+    const handleSelectChange = (book, shelf) => {
+      if(book)
+      {
+        updateAPI(book, shelf)
+        if(shelf !== 'none')
+        {
+          setSearchedBooks(
+            searchedBooks.filter((b) => {
+              return b.id !== book.id
+            })
+          )
+          let _removeBook = allBooks.filter((b) => {
+            return b.id !== book.id
+          })
+          book.shelf = shelf
+          _removeBook.push(book)
+          setBooks(_removeBook)
+        }
+      }
+    }
+
     return (
         <div className="search-books">
             <div className="search-books-bar">
@@ -34,7 +55,7 @@ export default function SearchBooks({searchAPI}) {
               <ol className="books-grid">
               {query !== '' && searchedBooks.map((book) => (
                 <li key={book.id}>
-                    <Book title={book.title} authors={book.authors} cover={book.imageLinks.thumbnail}/>
+                    <Book updateAPI={handleSelectChange} book={book} title={book.title} authors={book.authors} cover={book.imageLinks.thumbnail}/>
                 </li>
               ))}
               </ol>
