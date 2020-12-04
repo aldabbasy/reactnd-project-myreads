@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Bookshelf from '../Components/Bookshelf'
-export default function MyReads({ setBooks, books, updateAPI}) {
+export default function MyReads({ setBooks, books}) {
 
   const [currentlyReading, setCurrentlyReading] = useState([])
   const [wantToRead, setWantToRead] = useState([])
@@ -38,9 +38,9 @@ export default function MyReads({ setBooks, books, updateAPI}) {
             </div>
             <div className="list-books-content">
             <div>
-                <Bookshelf  allBooks={books} setBooks={setBooks} books={currentlyReading} updateAPI={updateAPI} title='Currently Reading' />
-                <Bookshelf  allBooks={books} setBooks={setBooks} books={wantToRead} updateAPI={updateAPI} title='Want To Read' />
-                <Bookshelf  allBooks={books} setBooks={setBooks} books={read} updateAPI={updateAPI} title='Read' />
+                <Bookshelf  allBooks={books} setBooks={setBooks} books={currentlyReading} title='Currently Reading' />
+                <Bookshelf  allBooks={books} setBooks={setBooks} books={wantToRead} title='Want To Read' />
+                <Bookshelf  allBooks={books} setBooks={setBooks} books={read} title='Read' />
             </div>
             </div>
             <div className="open-search">
