@@ -1,17 +1,18 @@
 import React from 'react'
 import Book from './Book'
-export default function Bookshelf({getBook, allBooks, setBooks, books, updateAPI, title}) {
+import * as CallingAPI from '../Services/BooksAPI'
+export default function Bookshelf({ allBooks, setBooks, books, title}) {
 
 	const handleSelectChange = (book, shelf) => {
 		if(book)
 		{
 		  if(shelf !== book.shelf)
 		  {
-			updateAPI(book, shelf).then((res) => {
+			CallingAPI.update(book, shelf).then((res) => {
 				let _removeBook = allBooks.filter((b) => {
 					return b.id !== book.id
 				})
-				getBook(book.id).then((res) => {
+				CallingAPI.get(book.id).then((res) => {
 					_removeBook.push(res)
 					setBooks(_removeBook)
 				})
@@ -27,7 +28,7 @@ export default function Bookshelf({getBook, allBooks, setBooks, books, updateAPI
 					<ol className="books-grid">
 						{books.map((book) => (
 							<li key={book.id}>
-								<Book book={book} updateAPI={handleSelectChange} title={book.title} authors={book.authors} cover={book.imageLinks.thumbnail}/>
+								<Book book={book} updateAPI={handleSelectChange} />
 							</li>
 						))}
 					</ol>

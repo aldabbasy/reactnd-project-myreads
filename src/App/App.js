@@ -23,10 +23,10 @@ export default function App() {
   return (
     <div className="app">
       <Route exact path='/' render={() => (
-          <MyReads getBook={CallingAPI.get} setBooks={setBooks} books={books} updateAPI={CallingAPI.update} />
+          <MyReads setBooks={setBooks} books={books} />
         )} />
       <Route path='/Search' render={() => (
-        <SearchBooks allBooks={books} setBooks={setBooks} updateAPI={CallingAPI.update} searchAPI={CallingAPI.search}/>
+        <SearchBooks allBooks={books} setBooks={setBooks} />
         )} />
     </div>
   )
