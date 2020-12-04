@@ -14,7 +14,7 @@ export default function Book({updateAPI, book}) {
 		<div className="book-top">
 			<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${"imageLinks" in book ? (book.imageLinks.thumbnail || '') : ''}")` }}></div>
 			<div className="book-shelf-changer">
-				<select value={book.shelf || 'move'} onChange={(e) => {handleSelectChange(e.target.value)}}>
+				<select value={book.shelf || 'none'} onChange={(e) => {handleSelectChange(e.target.value)}}>
 					<option value="move" disabled>Move to...</option>
 					<option value="currentlyReading">Currently Reading</option>
 					<option value="wantToRead">Want to Read</option>
